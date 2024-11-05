@@ -129,9 +129,14 @@ void print_process_hwm(bool mpi_usable) {
     hwm_ave /= world_size;
 
     if (rank == 0) {
-      printf("Host process high water mark memory consumption: %ld kB\n",
-             hwm_max);
-      printf("  Max: %ld, Min: %ld, Ave: %ld kB\n", hwm_max, hwm_min, hwm_ave);
+//      printf("Host process high water mark memory consumption: %ld kB\n",
+//             hwm_max);
+//      printf("  Max: %ld, Min: %ld, Ave: %ld kB\n", hwm_max, hwm_min, hwm_ave);
+      double hwm_max_mib = double(hwm_max)/1024.0;
+      printf("Host process high water mark memory consumption: %f MiB\n",
+        hwm_max_mib);
+      printf("  Max: %ld, Min: %ld, Ave: %ld KiB\n",
+        hwm_max,hwm_min,hwm_ave);
       printf("\n");
     }
   } else
@@ -139,8 +144,11 @@ void print_process_hwm(bool mpi_usable) {
   (void)mpi_usable;
 #endif
   {
-    printf("Host process high water mark memory consumption: %ld kB\n",
-           hwm_max);
+//    printf("Host process high water mark memory consumption: %ld kB\n",
+//           hwm_max);
+    double hwm_max_mib = double(hwm_max)/1024.0;
+    printf("Host process high water mark memory consumption: %f MiB\n",
+      hwm_max_mib);
     printf("\n");
   }
 }
